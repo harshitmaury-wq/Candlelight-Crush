@@ -121,3 +121,125 @@ function spawnObject() {
 
     GAME_AREA.appendChild(objectEl);
 }
+/**
+ * The main game loop: handles player movement, object movement, and collision detection.
+ */
+function updateGame() {
+    if (!gameRunning) return;
+
+    // --- 1. PLAYER MOVEMENT ---
+    const maxRight = GAME_AREA.offsetWidth - PLAYER_WIDTH;
+    
+    if (keysPressed['ArrowLeft'] || keysPressed['a']) {
+        playerX = Math.max(0, playerX - PLAYER_SPEED);
+    } 
+    if (keysPressed['ArrowRight'] || keysPressed['d']) {
+        playerX = Math.min(maxRight, playerX + PLAYER_SPEED);
+    }
+    
+    PLAYER.style.left = `${playerX}px`;
+    // --------------------------------------------------
+
+    // Get player position for collision (simplified math)
+    const playerBottom = GAME_AREA.offsetHeight;
+    const playerTop = playerBottom - PLAYER.offsetHeight;
+    const playerLeft = playerX;
+    const playerRight = playerX + PLAYER_WIDTH;
+    
+    // --- 2. OBJECT MOVEMENT AND COLLISION ---
+    const objectsToRemove = [];
+    document.querySelectorAll('.falling-object').forEach(objectEl => {
+        let currentY = parseFloat(objectEl.style.top);
+        
+        // Dynamic Speed: Speed increases based on the current score
+        const itemSpeed = DROP_SPEED_BASE + (score * DROP_SPEED_MULTIPLIER); 
+        
+        objectEl.style.top = `${currentY + itemSpeed}px`;
+
+        // Collision Check (simplified boundary check)
+        const objectY = currentY + objectEl.offsetHeight; 
+        const objectX = parseFloat(objectEl.style.left);
+        const objWidth = objectEl.offsetWidth;
+
+        if (objectY >= playerTop && objectY <= playerBottom) {
+            // Check if object is horizontally aligned with the player
+            if (objectX + objWidth > playerLeft && objectX < playerRight) {
+                
+                const type = objectEl.dataset.type;
+                const config = OBJECTS[type];
+
+                health = Math.min(MAX_HEALTH, Math.max(0, health + config.health));
+                score += config.score;
+
+                updateFlameVisual();
+                SCORE_DISPLAY.textContent = score;
+                objectsToRemove.push(objectEl);
+
+                // Display message feedback
+                MESSAGE_DISPLAY.textContent = config.health > 0 
+                    ? `+${config.health} Health (${config.emoji})` 
+                    : `${config.health} Health (${config.emoji})`;
+                MESSAGE_DISPLAY.style.color = config.health > 0 ? '#00ff00' : '#ff0000';
+            }
+        }
+
+        // Off-screen Check: object missed
+        if (currentY > GAME_AREA.offsetHeight) {
+            objectsToRemove.push(objectEl);
+            // Optionally: deduct health for missed resources here
+        }
+    });
+
+    // Remove collected/missed objects from the DOM
+    objectsToRemove.forEach(el => el.remove());
+}
+
+/**
+ * Stops the game, clears all timers, and displays the game over screen.
+**/
+/**
+ * Initializes and starts a new game session.
+ */
+function startGame() {
+    // Reset state
+    health = MAX_HEALTH;
+    score = 0;
+    gameRunning = true;
+    keysPressed = {}; 
+    
+    // Recalculate and center player position
+    if (GAME_AREA) { // Ensure GAME_AREA is loaded
+        const gameWidth = GAME_AREA.offsetWidth;
+        playerX = (gameWidth / 2) - (PLAYER_WIDTH / 2);
+        PLAYER.style.left = `${playerX}px`;
+    }
+
+    // Reset UI
+    document.getElementById('gameOverScreen').style.display = 'none';
+    MESSAGE_DISPLAY.textContent = `Collect ${OBJECTS.ember.emoji} to survive!`;
+    MESSAGE_DISPLAY.style.color = '#00ff00';
+    SCORE_DISPLAY.textContent = score;
+    
+    updateFlameVisual();
+    
+    startTimers(); // Starts all game loops
+}
+
+// --- INPUT HANDLERS (Called from index.html body attributes) ---
+function handleKeyDown(e) {
+    if (!gameRunning) return;
+    keysPressed[e.key] = true;
+    // Map 'a' to ArrowLeft and 'd' to ArrowRight
+    if (e.key === 'a') keysPressed['ArrowLeft'] = true;
+    if (e.key === 'd') keysPressed['ArrowRight'] = true;
+}
+
+function handleKeyUp(e) {
+    if (!gameRunning) return;
+    keysPressed[e.key] = false;
+    if (e.key === 'a') keysPressed['ArrowLeft'] = false;
+    if (e.key === 'd') keysPressed['ArrowRight'] = false;
+}
+
+// Start the game once the window and all elements are loaded
+window.onload = startGame;
