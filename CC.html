@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Spark Survival (Beginner Edition)</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+
 </head>
-<body>
+<!-- The body now relies on the external game.js for event handlers and initialization -->
+<body onkeydown="handleKeyDown(event)" onkeyup="handleKeyUp(event)">
+
+    <p>Use LEFT and RIGHT arrow keys (or A and D) to move!</p>
+
+    <div id="dashboard">
+        
+        <!-- 1. Game Area (Left) -->
+        <div id="gameArea">
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen">
+                <h2>Game Over!</h2>
+                <p>Score: <span id="finalScore">0</span></p>
+                <button onclick="startGame()">Restart Game</button>
+            </div>
+
+            <!-- Player (Character Base) -->
+            <div id="player"></div>
+
+        </div>
+
+        <!-- 2. UI/Health Panel (Right) -->
+        <div id="uiPanel">
+            <div style="text-align: center;">
+                <h3>SCORE</h3>
+                <p id="scoreDisplay">0</p>
+            </div>
+
+            <!-- Health Bar (Flame) -->
+            <div id="flameContainer">
+                  <div id="flameContainer">
+                <div id="fullFlame"></div>
+            </div>
+            </div>
+
+            <p id="message" style="font-size: 0.8em;">Collect 🔥 to survive!</p>
+        </div>
+
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
     
 </body>
 </html>

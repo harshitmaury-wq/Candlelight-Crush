@@ -1,0 +1,130 @@
+/* --- 1. General Styling (Simple) --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #fff;
+    overflow: hidden; 
+}
+
+/* --- 2. Dashboard Layout --- */
+#dashboard {
+    display: flex;
+    width: 800px; /* Fixed width for simplicity */
+    height: 500px; /* Fixed height for simplicity */
+    border: 5px solid #555;
+    background-color: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+/* Game Area (Left - Takes most space) */
+#gameArea {
+    position: relative;
+    flex-grow: 1; 
+    background-color: #1a1a1a; 
+    overflow: hidden;
+}
+
+/* UI/Health Panel (Right - Fixed width) */
+#uiPanel {
+    width: 150px;
+    background-color: #444; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- 3. UI Elements --- */
+#scoreDisplay {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+/* Restart Button Style */
+#gameOverScreen button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+#gameOverScreen button:hover {
+    background-color: #c0392b;
+}
+
+/* --- 4. Flame Health Bar --- */
+#flameContainer {
+    width: 60px;
+    height: 350px; 
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end; 
+    overflow: hidden; 
+    margin-top: 15px; 
+    border: 2px solid #555; /* Container border */
+    border-radius: 5px;
+}
+
+/* The actual flame/health element */
+
+
+
+/* --- 5. Player and Falling Objects --- */
+#player {
+    position: absolute;
+    bottom: 0;
+    width: 80px; 
+    height: 40px; 
+    background-color: #7d5c3f; /* Simple brown candle base */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    z-index: 100;
+    transition: left 0.1s linear; 
+}
+
+.falling-object {
+    position: absolute;
+    width: 30px; 
+    height: 30px;
+    font-size: 25px; 
+    text-align: center;
+    line-height: 30px; /* Center emoji vertically */
+    z-index: 50;
+    transition: transform 0.1s; /* Optional: small effect on hover */
+}
+
+/* --- 6. Game Over Screen --- */
+#gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    text-align: center;
+}
