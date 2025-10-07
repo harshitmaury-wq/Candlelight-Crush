@@ -3,54 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spark Survival (Beginner Edition)</title>
-    <!-- Link to the external CSS file -->
+    <title>Spark Survival: Audio & Full Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="CC.css">
-
+    <style>
+        /* Keyframe animations and base styling for the candle/flame are kept here 
+           or should be moved to style.css. I'll keep the core game styling in style.css. 
+           The original file uses a <style> block, so I will move all the content 
+           of the original <style> block into style.css. 
+        */
+    </style>
 </head>
-<!-- The body now relies on the external game.js for event handlers and initialization -->
-<body onkeydown="handleKeyDown(event)" onkeyup="handleKeyUp(event)">
+<body class="select-none">
+    
+    <audio id="gameMusic" src="sound/game-music.mp3" loop preload="auto"></audio>
+    <audio id="shieldSound" src="sound/shield.mp3" preload="auto"></audio>
+    <audio id="gameOverSound" src="sound/game-over.mp3" preload="auto"></audio>
+    <audio id="collectSound" src="sound/fire.mp3" preload="auto"></audio>
+    <audio id="collectsSound" src="sound/blip.mp3" preload="auto"></audio>
 
-    <p>Use LEFT and RIGHT arrow keys (or A and D) to move!</p>
 
     <div id="dashboard">
         
-        <!-- 1. Game Area (Left) -->
         <div id="gameArea">
             
-            <!-- Game Over Screen -->
-            <div id="gameOverScreen">
-                <h2>Game Over!</h2>
-                <p>Score: <span id="finalScore">0</span></p>
-                <button onclick="startGame()">Restart Game</button>
+            <div id="shieldTimerDisplay" 
+                 class="absolute top-4 left-4 p-2 bg-green-900/80 rounded-lg shadow-xl text-white font-bold hidden z-150 transition-opacity duration-300">
+                <p class="text-xs">SHIELD ACTIVE</p>
+                <div class="w-20 bg-gray-600 rounded-full h-2 mt-1 overflow-hidden">
+                    <div id="shieldCountdownBar" class="h-2 bg-green-400 ease-linear" style="width: 0%;"></div>
+                </div>
             </div>
 
-            <!-- Player (Character Base) -->
-            <div id="player"></div>
+            <div id="gameOverScreen">
+                <h2 class="text-4xl font-extrabold text-red-500 mb-4">Flame Extinguished!</h2>
+                <p class="text-xl mb-6">You survived for <span id="finalScore" class="font-bold text-yellow-400">0</span> seconds.</p>
+                <button id="restartButton" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition duration-150">
+                    Restart Game
+                </button>
+            </div>
+
+            <div id="player">
+                <div id="waxBase"></div>
+            </div>
 
         </div>
 
-        <!-- 2. UI/Health Panel (Right) -->
         <div id="uiPanel">
-            <div style="text-align: center;">
-                <h3>SCORE</h3>
-                <p id="scoreDisplay">0</p>
+            <div class="text-center w-full">
+                <h1 class="text-3xl font-bold text-white mb-4">Spark Survival</h1>
+                <div class="p-4 rounded-lg bg-gray-700 w-full shadow-lg mb-6">
+                    <p class="text-lg font-semibold text-gray-300">SCORE</p>
+                    <p id="scoreDisplay" class="text-5xl font-extrabold text-yellow-400 mt-1">0</p>
+                </div>
+
+                <div class="mb-4 w-full h-10"></div>
             </div>
 
-            <!-- Health Bar (Flame) -->
             <div id="flameContainer">
-                  <div id="flameContainer">
                 <div id="fullFlame"></div>
             </div>
-            </div>
 
-            <p id="message" style="font-size: 0.8em;">Collect 🔥 to survive!</p>
+            <p id="message" class="text-sm text-green-400 mt-4 text-center">Collect 🛡️ for a shield!</p>
         </div>
 
     </div>
 
-    <!-- Link to the external JavaScript file -->
     <script src="CC.js"></script>
-    
+
 </body>
 </html>
