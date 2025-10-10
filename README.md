@@ -62,11 +62,9 @@ If you are a developer and wish to run or modify the application locally, follow
     # OR: npm run dist (depending on your Electron setup)
     ```
     *The built files will appear in the `out/` or `dist/` directory.*
-
 ---
 
 ## 🤝 Contribution
-
 This project welcomes contributions! A special thank you to all contributors, including those who helped with the initial setup and PR process.
 
 | Role | Name | GitHub Profile |
