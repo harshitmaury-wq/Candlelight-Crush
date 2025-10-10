@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candlelight Crush</title> 
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <script src="firebase.js"></script>
+</head>
+<body class="select-none">
+    
+    <audio id="gameMusic" src="sound/game-music.mp3" loop preload="auto"></audio>
+    <audio id="shieldSound" src="sound/shield.mp3" preload="auto"></audio>
+    <audio id="gameOverSound" src="sound/game-over.mp3" preload="auto"></audio>
+    <audio id="collectSound" src="sound/fire.mp3" preload="auto"></audio>
+    <audio id="collectsSound" src="sound/blip.mp3" preload="auto"></audio>
+
+    <div id="authScreen" class="flex flex-col items-center">
+        <h1 class="text-4xl font-extrabold text-yellow-400 mb-6">Candlelight Crush</h1> 
+
+        <div class="flex w-full mb-6">
+            <button id="loginTabBtn" class="flex-1 py-2 rounded-tl-lg font-semibold glass-button glass-button-primary text-white">Log In</button>
+            <button id="signupTabBtn" class="flex-1 py-2 rounded-tr-lg font-semibold glass-button text-gray-300">Sign Up</button>
+        </div>
+
+        <div id="loginForm" class="w-full">
+            <input type="email" id="loginEmail" placeholder="Email" class="w-full p-3 mb-4 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+            <input type="password" id="loginPassword" placeholder="Password" class="w-full p-3 mb-6 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+            <button id="loginButton" class="w-full py-2 font-bold rounded-lg transition duration-150 mb-4 glass-button glass-button-primary">
+                Log In
+            </button>
+        </div>
+
+        <div id="signupForm" class="w-full hidden">
+            <input type="text" id="signupUsername" placeholder="Username" class="w-full p-3 mb-4 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+            <input type="email" id="signupEmail" placeholder="Email" class="w-full p-3 mb-4 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+            <input type="password" id="signupPassword" placeholder="Password" class="w-full p-3 mb-6 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+            <button id="signupButton" class="w-full py-3 font-bold rounded-lg transition duration-150 mb-4 glass-button glass-button-accent">
+                Sign Up
+            </button>
+        </div>
+
+        <p id="authMessage" class="text-red-400 mb-4"></p>
+
+        <button id="guestButton" class="w-full py-2 font-bold rounded-lg transition duration-150 glass-button text-white">
+            Play as Guest
+        </button>
+    </div>
+
+    <div id="welcomeScreen" class="flex-col items-center justify-center hidden">
+        <h2 class="text-5xl font-extrabold text-green-400 mb-4">Welcome!</h2>
+        <p id="welcomeMessage" class="text-xl text-gray-300 mb-10">You are ready to begin the Candlelight Crush.</p> 
+
+        <button id="startGameButton" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg shadow-xl transition duration-150">
+            Start Game
+        </button>
+        <button id="welcomeLogoutButton" class="mt-4 px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition duration-150">
+            Log Out
+        </button>
+    </div>
+
+    <div id="dashboard">
+        
+        <div id="gameArea">
+            <div id="pauseScreen">
+                <h2 class="text-4xl font-extrabold text-white mb-8">Game Paused</h2>
+                <button id="resumeButton" class="w-60 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition duration-150 mb-4">
+                    Resume Game
+                </button>
+                <button id="quitGameButton" class="w-60 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg transition duration-150">
+                    Quit to Start Screen
+                </button>
+            </div>
+            
+            <div id="shieldTimerDisplay" 
+                 class="absolute top-4 left-4 p-2 bg-green-900/80 rounded-lg shadow-xl text-white font-bold hidden z-150 transition-opacity duration-300">
+                <p class="text-xs">SHIELD ACTIVE</p>
+                <div class="w-20 bg-gray-600 rounded-full h-2 mt-1 overflow-hidden">
+                    <div id="shieldCountdownBar" class="h-2 bg-green-400 ease-linear" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div id="gameOverScreen">
+                <h2 class="text-4xl font-extrabold text-red-500 mb-4">Flame Extinguished!</h2>
+                <p class="text-xl mb-10">Your Final Score: <span id="finalScore" class="font-bold text-yellow-400 text-5xl">0</span></p>
+
+                <div class="flex justify-between w-11/12 max-w-sm">
+                    <button id="showLeaderboardButton" class="flex-1 mr-2 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition duration-150">
+                        Leaderboard
+                    </button>
+                    <button id="restartButton" class="flex-1 mx-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition duration-150">
+                        Restart Game
+                    </button>
+                    <button id="logoutButton" class="flex-1 ml-2 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition duration-150">
+                        Log Out
+                    </button>
+                </div>
+            </div>
+            
+            <div id="leaderboardScreen">
+                <h2 class="text-4xl font-extrabold text-blue-400 mb-8">Global Ranks</h2>
+
+                <div id="personalBest" class="p-4 rounded-lg bg-gray-700/70 w-11/12 max-w-sm shadow-xl mb-6 text-center">
+                    <h3 class="text-lg font-bold text-white mb-2">Your Highest Score:</h3>
+                    <p id="personalBestScore" class="text-5xl font-extrabold text-green-400">0</p>
+                </div>
+
+                <div id="globalLeaderboard" class="p-4 rounded-lg bg-gray-800/70 w-11/12 max-w-sm shadow-xl mb-8">
+                    <h3 class="text-xl font-bold text-white mb-2 text-left border-b border-gray-600 pb-1">Global Rankings</h3>
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">Rank</th>
+                                <th class="w-1/2">Name</th>
+                                <th class="w-1/4 text-right">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="globalLeaderboardTableBody">
+                            <tr><td colspan="3" class="text-center text-sm pt-2 text-gray-400">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <button id="leaderboardBackToGame" class="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition duration-150">
+                    Back to Game Over
+                </button>
+            </div>
+            
+            <div id="player">
+                <div id="waxBase"></div>
+            </div>
+
+        </div>
+
+        <div id="uiPanel">
+            <div class="text-right w-full">
+                <h1 class="text-3xl font-bold text-white mb-4">Candlelight Crush</h1> 
+
+                <div class="p-4 rounded-lg bg-gray-700 w-full shadow-lg mb-6 text-center">
+                    <p class="text-lg font-semibold text-gray-300">SCORE</p>
+                    <p id="scoreDisplay" class="text-5xl font-extrabold text-yellow-400 mt-1">0</p>
+                </div>
+
+                <div class="mb-4 w-full h-10"></div>
+            </div>
+
+            <div id="flameContainer">
+                <div id="fullFlame"></div>
+            </div>
+
+            <p id="message" class="text-sm text-green-400 mt-4 text-right">Collect 🛡️ for a shield!</p>
+        </div>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

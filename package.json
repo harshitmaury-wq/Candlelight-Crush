@@ -1,0 +1,53 @@
+{
+  "name": "candlelight-crush",
+  "version": "1.0.0",
+  "description": "A desktop application powered by Electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "dist": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [
+    "electron",
+    "desktop",
+    "html",
+    "css",
+    "javascript",
+    "firebase"
+  ],
+  "author": "Harsh",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.3",
+    "@electron-forge/maker-deb": "^7.10.0",
+    "@electron-forge/maker-rpm": "^7.10.0",
+    "@electron-forge/maker-squirrel": "^7.10.0",
+    "@electron-forge/maker-zip": "^7.10.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.10.0",
+    "@electron-forge/plugin-fuses": "^7.10.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^38.2.2"
+  },
+  "build": {
+    "appId": "com.harsh.Candlelight",
+    "productName": "Your Desktop App",
+    "files": [
+      "main.js",
+      "index.html",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  },
+  "dependencies": {
+    "electron-packager": "^17.1.2",
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}
