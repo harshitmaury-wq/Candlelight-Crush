@@ -2,7 +2,7 @@
 
 ## 🕯️ Overview
 
-**Candlelight Crush** is a cross-platform desktop application built using **Electron.js** and the **Node.js** runtime environment. This application provides a unique digital experience (e.g., a simple game, a utility tool, a desktop companion).
+**Candlelight Crush** is a desktop application built using **Electron.js** and the **Node.js** runtime environment. This application provides a unique digital experience (e.g., a simple game, a utility tool, a desktop companion).
 
 It is designed to run natively on Windows, offering a seamless experience outside of the web browser.
 
