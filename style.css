@@ -1,0 +1,352 @@
+/* Base Styling - Full Screen Dark Background */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0d;  
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    
+    display: flex;
+    background-image: url('sound/bg3.png'); 
+    
+    /* Keeps content justified to the right of the screen */
+    justify-content: flex-end; 
+    align-items: center;
+    width: 100vw; 
+    height: 100vh;
+    margin: 0;
+    padding: 0; 
+    overflow: hidden; 
+}
+
+/* --- SCREEN CONTAINER STYLES --- */
+#authScreen, #welcomeScreen {
+    
+ 
+    /* Glassmorphism base - dark translucent */
+    background: rgba(31, 41, 55, 0.4); 
+    backdrop-filter: blur(10px) saturate(180%); 
+    -webkit-backdrop-filter: blur(10px) saturate(180%); 
+    
+    border-radius: 12px;
+    /* Cool white border */
+    border: 1px solid rgba(224, 255, 255, 0.3); 
+    /* Soft, cool white inner glow and dark shadow */
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.5), /* Outer dark shadow for depth */
+        inset 0 0 15px rgba(224, 255, 255, 0.2); /* Inner cool white glow */
+    
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    color: #d1d5db;
+    text-align: center;
+    /* MODIFIED: Reduced margin so it's closer to the right edge */
+    margin-right: 10%; 
+
+    /* Transition for smooth hover/movement effect */
+    transition: all 0.3s ease-in-out; 
+}
+
+/* Hover Effect - Container moves up and enhances cool glow */
+#authScreen:hover, #welcomeScreen:hover {
+    transform:scale(1.07) /* Moves the container up */
+}
+    
+#authScreen input {
+    background-color: rgba(55, 65, 81, 0.6); 
+    border: 1px solid rgba(75, 85, 99, 0.4); 
+    color: white;
+    outline: none; 
+}
+#authScreen input:focus {
+     /* Focus ring uses cool white/cyan */
+     border-color: #e0ffff; 
+     box-shadow: 0 0 0 2px rgba(224, 255, 255, 0.8); 
+}
+
+/* --- NEW GLASS BUTTON STYLES FOR AUTH CONTAINER --- */
+.glass-button {
+    background: rgba(255, 255, 255, 0.1); /* Light, subtle background */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #e0ffff; /* Cool white text */
+    transition: all 0.2s ease-in-out;
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(224, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(224, 255, 255, 0.15); /* Subtle cool white glow on hover */
+    transform: translateY(-2px);
+}
+
+.glass-button-primary {
+    /* Inherits glass-button, adds a primary accent color */
+    background: rgba(30, 144, 255, 0.2); /* Dodger blue hint */
+    border-color: rgba(30, 144, 255, 0.4);
+}
+
+.glass-button-primary:hover {
+    background: rgba(30, 144, 255, 0.3);
+    border-color: rgba(30, 144, 255, 0.6);
+}
+
+.glass-button-accent {
+    /* Inherits glass-button, adds a secondary accent color */
+    background: rgba(148, 0, 211, 0.2); /* Dark Violet hint */
+    border-color: rgba(148, 0, 211, 0.4);
+}
+
+.glass-button-accent:hover {
+    background: rgba(148, 0, 211, 0.3);
+    border-color: rgba(148, 0, 211, 0.6);
+}
+/* --- END NEW GLASS BUTTON STYLES --- */
+
+
+/* Main Dashboard Container - MODIFIED for full right justification */
+#dashboard {
+    display: none; 
+    /* MODIFIED: Take up full width and justify content to the right edge */
+    width: 100vw; 
+    max-width: none; 
+    height: 100%; 
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent; 
+    overflow: hidden;
+    
+    /* Pushes gameArea to the left and uiPanel to the right edge */
+    justify-content: flex-end; 
+}
+
+/* --- UI PANEL & GAME AREA STYLES --- */
+#gameArea {
+    position: relative;
+    /* Calculate the remaining space after UI panel (100vw - 250px) */
+    width: calc(100vw - 250px); /* Adjusted to 250px to match uiPanel width */
+    background-color: rgba(0, 0, 0, 0.4); 
+    overflow: hidden;
+}
+
+#uiPanel {
+    width: 250px;
+    
+    /* Glassmorphism styling (Restored) */
+    background: rgba(31, 41, 55, 0.4); 
+    backdrop-filter: blur(10px) saturate(180%); 
+    -webkit-backdrop-filter: blur(10px) saturate(180%); 
+    
+    border-radius: 12px;
+    border: 1px solid rgba(224, 255, 255, 0.3); 
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.5), 
+        inset 0 0 15px rgba(224, 255, 255, 0.2); 
+    
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+    /* Justifies content to the right */
+    align-items: flex-end; 
+    justify-content: space-between;
+    
+    height: 100%; 
+    z-index: 500;
+    /* Make sure rounded corners don't show background underneath */
+    border-top-right-radius: 0; 
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+#flameContainer {
+    position: relative; 
+    width: 100px;
+    height: 400px; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 50px; 
+    pointer-events: none; 
+    
+    /* Center horizontally within uiPanel, overriding align-items: flex-end */
+    align-self: center; 
+}
+
+/* --- LEADERBOARD STYLES (Existing) --- */
+#globalLeaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #d1d5db;
+    font-size: 0.95rem;
+}
+
+#globalLeaderboard th {
+    text-align: left;
+    padding: 6px 0;
+    color: #9ca3af;
+    border-bottom: 1px solid #4b5563;
+    font-weight: normal;
+}
+
+#globalLeaderboard td {
+    text-align: left;
+    padding: 6px 0;
+    font-weight: bold;
+}
+
+#globalLeaderboard .rank-1 { color: #ffd700; } 
+#globalLeaderboard .rank-2 { color: #c0c0c0; } 
+#globalLeaderboard .rank-3 { color: #cd7f32; } 
+/* --- END LEADERBOARD STYLES --- */
+
+
+#player {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; 
+    height: 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 100;
+    transition: box-shadow 0.2s; 
+    border-radius: 10px; 
+}
+
+#player.shield-active { 
+    box-shadow: 0 0 20px 8px rgba(0, 255, 0, 0.5), 
+                0 0 40px 15px rgba(0, 255, 0, 0.3);
+}
+
+#waxBase {
+    position: absolute;
+    bottom: 0;
+    width: 50px; 
+    height: 20px; 
+    z-index: 20; 
+    background: linear-gradient(to bottom, #d8d8d8, #a0a0a0);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+}
+
+#waxBase::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-color: #f0f0f0; 
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#fullFlame {
+    width: 35px; 
+    background: linear-gradient(to top, #ff8c00 0%, #ffae42 50%, #fffb9d 100%); 
+    border-radius: 50% 50% 50% 50% / 85% 85% 15% 15%; 
+    height: 360px; 
+    transition: height 0.6s ease-out, opacity 0.3s ease-out; 
+    position: absolute; 
+    bottom: 10px; 
+    z-index: 110; 
+    animation: flicker 1.0s infinite alternate; 
+    transform-origin: 50% 100%; 
+}
+
+@keyframes flicker {
+    0% { transform: scaleY(1.0) translateX(0px); box-shadow: 0 0 15px 5px rgba(255, 165, 0, 0.7); }
+    50% { transform: scaleY(0.98) translateX(1px); box-shadow: 0 0 18px 6px rgba(255, 165, 0, 0.8); }
+    100% { transform: scaleY(1.02) translateX(-1px); box-shadow: 0 0 15px 5px rgba(255, 165, 0, 0.7); }
+}
+
+
+#fullFlame::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%; 
+    height: 100%; 
+    background: linear-gradient(to top, #ffcc00 0%, #ffffff 80%);
+    border-radius: 50% 50% 50% 50% / 88% 88% 12% 12%; 
+    filter: blur(2px);
+    z-index: 111;
+    transition: all 0.2s ease-out;
+}
+
+.falling-object {
+    position: absolute;
+    width: 40px; 
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; 
+    z-index: 50;
+}
+
+.falling-object[data-type="shield-powerup"] {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    animation: shield-pulse 1.0s infinite alternate; 
+}
+
+@keyframes shield-pulse {
+    0% { opacity: 0.8; transform: scale(1); box-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
+    100% { opacity: 1.0; transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 255, 0, 1); }
+}
+
+/* Game Over Screen (Existing) */
+#gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    display: none; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+/* Leaderboard Screen (Existing) */
+#leaderboardScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98); 
+    color: white;
+    display: none; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 210;
+}
+
+/* Pause Screen */
+#pauseScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    color: white;
+    display: none; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 220; 
+}
