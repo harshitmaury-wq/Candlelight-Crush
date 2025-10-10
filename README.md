@@ -70,8 +70,9 @@ If you are a developer and wish to run or modify the application locally, follow
 This project welcomes contributions! A special thank you to all contributors, including those who helped with the initial setup and PR process.
 
 | Role | Name | GitHub Profile |
-| **Owner/Maintainer** | Harshit Maurya (harshitmaury-wq) |
-| **Initial Contributor** | Himanshu Ranjan (HimanshTheCoder) &&  Harsh Rajput(Raj0-0dev)|
+| **Owner/Maintainer** | Harshit Maurya (https://github.com/harshitmaury-wq) |
+| **Initial Contributor** | Himanshu Ranjan ([HimanshTheCoder] https://github.com/HimanshTheCoder) && |
+| **Final Contributor** |  Harsh Rajput([Raj0-0dev](https://github.com/Raj0-0dev))
 
 If you have suggestions, bug reports, or would like to contribute code, please open an [Issue](https://github.com/harshitmaury-wq/Candlelight-Crush/issues) or submit a [Pull Request](https://github.com/harshitmaury-wq/Candlelight-Crush/pulls).
 
