@@ -1,62 +1,82 @@
 # Candlelight Crush
 
-Candlelight Crush is a simple, engaging frontend web project built using core web technologies: **HTML**, **CSS**, and **JavaScript**.
+## 🕯️ Overview
 
-While the specific functionality may vary, the project is designed to capture a cozy, romantic, or visually appealing aesthetic, likely featuring elements related to candles, ambiance, or a gentle "crush" theme.
+**Candlelight Crush** is a cross-platform desktop application built using **Electron.js** and the **Node.js** runtime environment. This application provides a unique digital experience (e.g., a simple game, a utility tool, a desktop companion—*adjust this description to fit your app's actual function*).
+
+It is designed to run natively on Windows, offering a seamless experience outside of the web browser.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Download & Installation
 
-To view this project, you only need a modern web browser.
+The easiest way to get the application is to download the pre-built installer from the GitHub Releases page.
+
+### Windows (.exe Installer)
+
+1.  Go to the **[Candlelight Crush Releases Page](https://github.com/harshitmaury-wq/Candlelight-Crush/releases)**.
+2.  Download the file named: `Candlelight-Crush Setup X.X.X.exe` (where X.X.X is the latest version).
+3.  Run the downloaded `.exe` file and follow the installer instructions.
+4.  Make sure the downloaded file has extension .exe if not change the extension to .exe manually after downloading the setup from github release.
+
+
+## ✨ Features
+
+* **Feature 1:** Simple, intuitive user interface with authentication included create your account and dive into the game of flame).
+* **Feature 2:** Ensure internet connectivity for application work properly.
+* **Feature 3:** Custom keyboard shortcuts-- [ESC KEY -- to pause and resume the game).
+
+---
+
+## 🛠️ Developer Setup (Running from Source)
+
+If you are a developer and wish to run or modify the application locally, follow these steps.
+
+### Prerequisites
+
+* Node.js (LTS version recommended)
+* Git
+
+### Steps
 
 1.  **Clone the repository:**
     ```bash
     git clone [https://github.com/harshitmaury-wq/Candlelight-Crush.git](https://github.com/harshitmaury-wq/Candlelight-Crush.git)
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
     cd Candlelight-Crush
     ```
-3.  **Open the main file:**
-    Simply open the **`CC.html`** file in your preferred web browser.
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the application in development mode:**
+    ```bash
+    npm start
+    # OR: npm run dev (depending on your Electron setup)
+    ```
+
+4.  **Build the application (generate installers/executables):**
+    ```bash
+    npm run make
+    # OR: npm run dist (depending on your Electron setup)
+    ```
+    *The built files will appear in the `out/` or `dist/` directory.*
 
 ---
 
-## 📂 Project Structure
+## 🤝 Contribution
 
-The repository is structured with three core files:
+This project welcomes contributions! A special thank you to all contributors, including those who helped with the initial setup and PR process.
 
-| File Name | Purpose |
-| :--- | :--- |
-| **`CC.html`** | The main **HTML** structure and content of the web page. |
-| **`CC.css`** | The **CSS** styles that provide the visual design, layout, and "candlelight" ambiance. |
-| **`CC.js`** | The **JavaScript** file responsible for adding interactivity, dynamic elements, and any specific logic. |
+| Role | Name | GitHub Profile |
+| **Owner/Maintainer** | Harshit Maurya (harshitmaury-wq) |
+| **Initial Contributor** | Himanshu Ranjan (HimanshTheCoder) &&  Harsh Rajput(Raj0-0dev)|
 
----
-
-## ✨ Features (Inferred)
-
-Based on the file names and project title, the project may include:
-
-* **Cozy Aesthetics:** CSS styling focused on warm colors, soft shadows, or candle-like visual effects.
-* **Responsive Design:** A layout that adjusts well to different screen sizes.
-* **Interactivity:** Basic JavaScript functionality for user interaction, animation, or dynamic content changes.
-
----
-
-## 🤝 Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1.  Fork the Project.
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the Branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
+If you have suggestions, bug reports, or would like to contribute code, please open an [Issue](https://github.com/harshitmaury-wq/Candlelight-Crush/issues) or submit a [Pull Request](https://github.com/harshitmaury-wq/Candlelight-Crush/pulls).
 
 ---
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for more information. *(Note: You may want to add a LICENSE file to your repository.)*
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
